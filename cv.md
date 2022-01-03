@@ -127,7 +127,7 @@ $(function() {
 
 
 #### Working Experience
-Working about 7 years on freelance Here link on my profile on ukrainian freelance freelance exchange https://freelancehunt.com/freelancer/Andrux.html
+Working about 9 years on freelance Here link on my profile on ukrainian freelance freelance exchange https://freelancehunt.com/freelancer/Andrux.html
 
 ####Education
 * Admiral Makarov National University of Shipbuilding (Computer science)
