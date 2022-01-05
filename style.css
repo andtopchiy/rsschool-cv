@@ -60,10 +60,18 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+	text-align: center;
 }
 
 .github__img {
     width: 52px;
+	margin-top: 20px
+	
+}
+
+.githubname{
+	display: block;
+	margin-bottom: 20px
 }
 
 .rs__logo {
