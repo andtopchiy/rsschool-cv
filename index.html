@@ -65,105 +65,72 @@
         </section>
         <section>
             <pre><code>
-	        jQuery(function($){
-			$(document).mouseup(function (e){ // событие клика по веб-документу
-				var div = $(".menu-wrap.menu-show, .mob-menu&gt;.toggle-button, #menu"), // тут указываем ID элемента
-					$menuWrap = $('.menu-wrap'),
-					$toggleButtonMenu = $('.toggle-button');
-				if (!div.is(e.target) // если клик был не по нашему блоку
-					&amp;&amp; div.has(e.target).length === 0) { // и не по его дочерним элементам
-					$menuWrap.removeClass('menu-show');
-					$('.toggle-button.close-mob-btn').removeClass("showbtn");
-					$toggleButtonMenu.removeClass('button-open');
-				}
-			});
-		});
-		$(document).ready(function() {
-			var $searchBlock = $('#div_search'),
-				$searchRow = $('#search-row');
-			$searchBlock.on('click', function() {
-				$($searchRow).addClass('hover-search');
-			});
-			$(".phone-mobhead-btn img, .xs-menu-hidden .arr-grey").on('click', function() {
-				$('.xs-menu-hidden').slideToggle(360).toggleClass('on-phone-mob');
-			});
-			$(".search-mobhead-btn img, .close-search img").on('click', function() {
-				$('.search-mob-head').toggleClass('search-on');
-				$('.search-mob-head #search-header').focus();
-			});
-		});
+	        import i18Obj from './translate.js';
 
-		jQuery(function($){
-			$(document).mouseup(function (e){
-				var div = $("#div_search"),
-					$searchRow = $('#search-row');
+const hamburger = document.querySelector('.hamburger');
+const menuMob = document.querySelector('.nav');
+const navLinks = document.querySelectorAll('.nav-link');
 
-				if (!div.is(e.target)
-					&amp;&amp; div.has(e.target).length === 0) {
-					$searchRow.removeClass('hover-search');
-				}
+const portfolioImages = document.querySelectorAll('.photo-item-img');
+const portfolioBtns = document.querySelectorAll('.btn-black_gold');
+const seasons = ['winter', 'spring', 'summer', 'autumn'];
 
-			});
-		});
-		$(document).ready(function() {
-			$('.option .input label').html(function(_, oldHtml) { return oldHtml.replace(/:/g, ''); });
-		});
-		$(document).ready(function() {
-			$('.seotext').click(function() {
-				$('.opentext').addClass('act');
-			});
-		});
+if (2 % 2 == 0) {
+  console.log('true');
+}
+else {
+  console.log('false');
+}
 
-		$(function() {
-			$(".opentext").click(function(e) {
-				$('.seotext').toggleClass('active');
-			});
-			$("#on-filter-category, .close-filtr, .show-all-filtrmob").click(function(e) {
-				$('#main_content').toggleClass('active');
-				$('#sortir-panel').toggleClass('active');
-			});
+// mob-menu
+const toggleMenu = () => {
+  hamburger.classList.toggle('actv');
+  menuMob.classList.toggle('actv');
+};
+hamburger.addEventListener('click', toggleMenu);
 
-		/*sorting-category*/
-			if($("span").is(".actv.dwntoup")){
-				$(".actv").parent(".active-sort").addClass('acv-sort');
+const closeMenu = (event) => {
+  if (event.target.classList.contains('nav-link')) {
+    hamburger.classList.remove('actv');
+    menuMob.classList.remove('actv');
+  }
+};
 
-			}
+navLinks.forEach((el) => el.addEventListener('click', closeMenu));
 
-			if($("span").is(".actv.uptodwn")){
-				$(".actv").parent(".active-sort").addClass('acv-sort');
-			}
 
-			if($("span").is(".actv.uptodwn")){
+document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('click', e => {
+    const target = e.target;
+    if (!target.closest('.nav') && !target.closest('.hamburger')) {
+      hamburger.classList.remove('actv');
+      menuMob.classList.remove('actv');
+    }
+  });
+});
 
-				$('.sort-btn').on('click', function (e) {
-					var link = $(".actv.uptodwn").parent(".active-sort.acv-sort")[0];
-					var linkEvent = document.createEvent('MouseEvents');
-					linkEvent.initEvent('click', true, true);
-					link.dispatchEvent(linkEvent);
-					e.preventDefault();
-				});
-			} else if($("span").is(".actv.dwntoup")){
-				$('.sort-btn').on('click', function (e) {
-					var link = $(".actv.dwntoup").parent(".active-sort.acv-sort")[0];
-					var linkEvent = document.createEvent('MouseEvents');
-					linkEvent.initEvent('click', true, true);
-					link.dispatchEvent(linkEvent);
-					e.preventDefault();
-				});
-			} else {
-				$('.sort-btn').on('click', function (e) {
-					var link = $('.sort-price-lnk a')[0];
-					var linkEvent = document.createEvent('MouseEvents');
-					linkEvent.initEvent('click', true, true);
-					link.dispatchEvent(linkEvent);
-					e.preventDefault();
-				});
-			}
+//slider
+const changeImage = (event) => {
+  portfolioBtns.forEach((el) => el.classList.remove('actv'));
+  event.target.classList.add("actv");
+  if (event.target.classList.contains('btn-black_gold')) {
+    console.log(event.currentTarget.dataset.season);
+    portfolioImages.forEach((img, index) => img.src = `./assets/img/${event.currentTarget.dataset.season}/${index + 1}.jpg`);
+  }
+};
+portfolioBtns.forEach((el) => el.addEventListener('click', changeImage));
 
-			if($("span").is(".dwntoup")){
-				$('.sort-btn').addClass('rotate-img');
-			}
-		});
+//slider-cashe
+function preloadSummerImages() {
+  seasons.forEach(folder => {
+    for (let i = 1; i <= 6; i++) {
+      const img = new Image();
+      img.src = `./assets/img/${folder}/${i}.jpg`;
+    }
+  });
+}
+preloadSummerImages();
+
 </code></pre>
         </section>
         <section>
